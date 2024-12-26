@@ -103,6 +103,18 @@ def remover_tarefa():
             os.system('cls')
             input('Entrada inválida! Digite apenas números. pressione <ENTER> e tente novamente!!')  
 
+def editar_tarefa():
+    while True:
+        os.system('cls')
+        listar_tarefas()
+        try:
+            escolha_tarefa = input('Escolha a tarefa a ser editada!!')
+        except IndexError:
+            pass
+        except ValueError:
+            pass
+            
+
 def exibir_menu():
     os.system('cls')
     print('''
