@@ -106,9 +106,24 @@ def remover_tarefa():
 def editar_tarefa():
     while True:
         os.system('cls')
+        if not tarefas:
+            print("Nenhuma tarefa cadastrada para editar.")
+            input("Pressione <ENTER> para voltar ao menu.")
+            break
+        
         listar_tarefas()
+
         try:
             escolha_tarefa = input('Escolha a tarefa a ser editada!!')
+            escolha_int = int(escolha_tarefa)
+
+            if escolha_int < 1 or escolha_int > len(tarefas):
+               os.system('cls')
+               input('Opção inválida, escolha o número da tarefa entre as listadas.\nPressione <ENTER) e tente novamente!')
+               continue
+
+            
+
         except IndexError:
             pass
         except ValueError:
