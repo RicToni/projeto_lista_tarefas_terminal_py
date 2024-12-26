@@ -15,38 +15,48 @@ def criar_tarefa():
             input('Pressione <ENTER> e tente novamente.')
             continue
         os.system('cls')
-        data_str = input('Insira a data da tarefa (DD/MM/AAAA) -> ')
-        try:
-            data = datetime.strptime(data_str, '%d/%m/%Y').date()
-        except ValueError:
+        while True:
+            data_str = input('Insira a data da tarefa (DD/MM/AAAA) -> ')
+            try:
+                data = datetime.strptime(data_str, '%d/%m/%Y').date()
+                break
+            except ValueError:
+                os.system('cls')
+                print('Data inválida, insira no formato (DD/MM/AAAA)')
+                input('Pressione <ENTER> e tene novamente.')
+                continue
+        while True:
             os.system('cls')
-            print('Data inválida, insira no formato (DD/MM/AAAA)')
-            input('Pressione <ENTER> e tene novamente.')
-            continue
-        os.system('cls')
-        horario_str = input('Insira o horário da tarefa -> ')
-        try:
-            horario = datetime.strptime(horario_str, '%H:%M').time()
-        except ValueError:
-            os.system('cls')
-            print('Horário inválido, insira no formato HH:MM')
-            input('Pressione <ENTER> e tene novamente.')
-            continue
+            horario_str = input('Insira o horário da tarefa -> ')
+            try:
+                horario = datetime.strptime(horario_str, '%H:%M').time()
+                break
+            except ValueError:
+                os.system('cls')
+                print('Horário inválido, insira no formato HH:MM')
+                input('Pressione <ENTER> e tene novamente.')
+                continue
         data_hora = datetime.combine(data, horario)
-        os.system('cls')
-        descr = input('Descreva brevemente a tarefa -> ')
-        if not descr.strip():
+        while True:
             os.system('cls')
-            print('A descrição da tarefa não pode estar vazia!!')
-            input('Pressione <ENTER> e tente novamente.')
-            continue
-        os.system('cls')
-        prior_str = input('Defina a prioridade: [3]ALTA - [2]MEDIA - [1]BAIXA -> ')
-        if prior_str not in ('1','2','3'):
+            descr = input('Descreva brevemente a tarefa -> ')
+            if not descr.strip():
+                os.system('cls')
+                print('A descrição da tarefa não pode estar vazia!!')
+                input('Pressione <ENTER> e tente novamente.')
+                continue
+            else:
+                break
+        while True:
             os.system('cls')
-            print('Classificação inválida, escolha entre as seguintes opções: [3]ALTA - [2]MEDIA - [1]BAIXA ')
-            input('Pressione <ENTER> e tente novamente.')
-            continue
+            prior_str = input('Defina a prioridade: [3]ALTA - [2]MEDIA - [1]BAIXA -> ')
+            if prior_str not in ('1','2','3'):
+                os.system('cls')
+                print('Classificação inválida, escolha entre as seguintes opções: [3]ALTA - [2]MEDIA - [1]BAIXA ')
+                input('Pressione <ENTER> e tente novamente.')
+                continue
+            else:
+                break
         prior = int(prior_str)
         tarefa = dict(nome = nome, data = data_hora, descr = descr, priori = prior)
         tarefas.append(tarefa)
