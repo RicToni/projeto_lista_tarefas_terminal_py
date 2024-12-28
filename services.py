@@ -118,15 +118,15 @@ def editar_tarefa():
 
             if escolha_int < 1 or escolha_int > len(tarefas):
                os.system('cls')
-               input('Opção inválida, escolha o número da tarefa entre as listadas.\nPressione <ENTER) e tente novamente!')
+               input('Opção inválida, escolha o número da tarefa entre as listadas.\nPressione <ENTER> e tente novamente!')
                continue
 
             tarefa = tarefas[escolha_int - 1]
             os.system('cls')
-            print(f'Editando a tarefa: {tarefas[tarefa]}')   ## Formatar a saída para o usuário. 
+            print(f'Editando a tarefa: {tarefa}')   ## Formatar a saída para o usuário. 
 
             os.system('cls')
-            novo_nome = input(f'Nome: {tarefas[tarefa["nome"]]} - Insira o novo nome ou pressione <ENTER> para manter o atual -> ') 
+            novo_nome = input(f'Nome: {tarefa["nome"]} - Insira o novo nome ou pressione <ENTER> para manter o atual -> ') 
             if novo_nome.strip():
                 tarefa["nome"] = novo_nome
             
@@ -139,7 +139,7 @@ def editar_tarefa():
                     print("Data inválida, mantendo a anterior.")
             
             os.system('cls')
-            novo_horario = input(f'Horário (atual: {tarefa['data'].strftime('%H:%M')}) - Insira o novo horário ou pressione <ENTER> para manter o atual -> ")'.strip())
+            novo_horario = input(f"Horário atual: {tarefa['data'].strftime('%H:%M')} - Insira o novo horário ou pressione <ENTER> para manter o atual -> ")
             if novo_horario:
                 try:
                     tarefa['data'] = datetime.combine(
