@@ -3,7 +3,8 @@ import os
 
 os.system('cls')
 tarefas = []
-
+TAREFA_CONCLUIDA = "✅"
+TAREFA_NAO_CONCLUIDA = "❌"
 
 def criar_tarefa():
     while True:
@@ -58,12 +59,16 @@ def criar_tarefa():
             else:
                 break
         prior = int(prior_str)
-        tarefa = dict(nome = nome, data = data_hora, descr = descr, priori = prior)
+
+        tarefa = dict(nome = nome, data = data_hora, descr = descr, priori = prior, sit = False)
         tarefas.append(tarefa)
+
         os.system('cls')
         print(f'Tarefa "{tarefa["nome"]}" criada com sucesso!!')
         input('Pressione <ENTER> pra voltar ao menu eanteriror!!')
         break
+
+        
  
     
     # nome = dict(nome = nome, data = data, desc = desc, priori = priori)
@@ -73,8 +78,9 @@ def listar_tarefas():
     os.system('cls')
     index = 1
     for tarefa in tarefas:
+        status = TAREFA_CONCLUIDA if tarefa['sit'] else TAREFA_NAO_CONCLUIDA
         print(f'''
-Tarefa {index}:
+Tarefa {index}: {status}
 --------------------------------
 Nome: {tarefa["nome"]}
 Data/Hora: {tarefa["data"]}
@@ -169,7 +175,40 @@ def editar_tarefa():
         except ValueError:
             print("Entrada inválida. Digite apenas números.")
             input("Pressione <ENTER> para tentar novamente.")
-            
+
+def concluir_tarefa():
+    while True:
+        os.system('cls')
+        if not tarefas:
+           print("Nenhuma tarefa cadastrada para editar.")
+           input("Pressione <ENTER> para voltar ao menu.")
+           break
+       
+        listar_tarefas()
+        escolha_tarefa = input('Escolha a tarefa a ser concluida!!').strip()
+    
+        try:
+            escolha_int = int(escolha_tarefa)
+            if escolha_int < 1 or escolha_int > len(tarefas):
+                os.system('cls')
+                input('Opção inválida, escolha o número da tarefa entre as listadas.\nPressione <ENTER> e tente novamente!')
+                continue
+            tarefa = tarefas[escolha_int - 1]
+            if tarefa['sit'] == True:
+                input('A tarefa escolhida já está marcada como cocnluida! Pressiona <ENTER> para retornar ao menu!')
+                break
+            else:
+                tarefa['sit'] = True
+                print(f'A tarefa {tarefa["nome"]} foi marcada como concluída!')
+                input('Pressione <ENTER> para voltar ao menu anterior!')
+                break
+
+        except IndexError:
+            print("Número inválido. Escolha um número correspondente a uma tarefa existente.")
+            input("Pressione <ENTER> para tentar novamente.")
+        except ValueError:
+            print("Entrada inválida. Digite apenas números.")
+            input("Pressione <ENTER> para tentar novamente.")
 
 def exibir_menu():
     os.system('cls')
@@ -193,3 +232,6 @@ def exibir_menu():
         remover_tarefa()
     elif opcao == '4':
         editar_tarefa()
+    elif opcao == '5':
+        concluir_tarefa()
+    
