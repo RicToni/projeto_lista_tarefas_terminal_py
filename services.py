@@ -110,7 +110,7 @@ def editar_tarefa():
             print("Nenhuma tarefa cadastrada para editar.")
             input("Pressione <ENTER> para voltar ao menu.")
             break
-        
+
         listar_tarefas()
 
         try:
@@ -122,12 +122,27 @@ def editar_tarefa():
                input('Opção inválida, escolha o número da tarefa entre as listadas.\nPressione <ENTER) e tente novamente!')
                continue
 
+            tarefa = tarefas[escolha_int - 1]
+            os.system('cls')
+            print(f'Editando a tarefa: {tarefas[tarefa]}')   ## Formatar a saída para o usuário. 
+
+            novo_nome = input(f'Nome: {tarefas[tarefa["nome"]]} - Insira o novo nome ou pressione <ENTER> para manter o atual -> ') 
+            if novo_nome.strip():
+                tarefas[tarefa["nome"]] = novo_nome
             
+                
+                                
+                
+
+
+            novo_nome = input(f'Nome: {tarefas[tarefa["nome"]]} - Insira o novo nome -> ')         
 
         except IndexError:
-            pass
+            print("Número inválido. Escolha um número correspondente a uma tarefa existente.")
+            input("Pressione <ENTER> para tentar novamente.")
         except ValueError:
-            pass
+            print("Entrada inválida. Digite apenas números.")
+            input("Pressione <ENTER> para tentar novamente.")
             
 
 def exibir_menu():
@@ -151,4 +166,4 @@ def exibir_menu():
     elif opcao == '3':
         remover_tarefa()
     elif opcao == '4':
-        pass
+        editar_tarefa()
