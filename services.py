@@ -128,10 +128,35 @@ def editar_tarefa():
 
             novo_nome = input(f'Nome: {tarefas[tarefa["nome"]]} - Insira o novo nome ou pressione <ENTER> para manter o atual -> ') 
             if novo_nome.strip():
-                tarefas[tarefa["nome"]] = novo_nome
+                tarefa["nome"] = novo_nome
             
-                
-                                
+            nova_data = input(f"Data atual: {tarefa['data'].strftime('%d/%m/%Y')}) - Insira nova data ou pressiona <ENTER>para manter a atual -> ").strip()
+            if nova_data:
+                try:
+                    tarefa['data'] = datetime.strptime(nova_data, '%d/%m/%Y').date()
+                except ValueError:
+                    print("Data inválida, mantendo a anterior.")
+            
+            novo_horario = input(f'Horário (atual: {tarefa['data'].strftime('%H:%M')}) - Insira o novo horário ou pressione <ENTER> para manter o atual -> ")'.strip())
+            if novo_horario:
+                try:
+                    tarefa['data'] = datetime.combine(
+                        tarefa['data'], datetime.strptime(novo_horario, '%H:%M').time()
+                    )
+                except ValueError:
+                    print("Horário inválido, mantendo o anterior.")
+
+            nova_descr = input(f"Descrição atual: {tarefa['descr']} - Digite uma nova descrição ou pressione <ENTER> para manter a atual  -> ").strip()
+            if nova_descr:
+                tarefa['descr'] = nova_descr   
+
+            nova_prioridade = input(f"Nova prioridade (atual: {tarefa['priori']}) [1, 2, 3] -> ").strip()
+            if nova_prioridade in ('1', '2', '3'):
+                tarefa['priori'] = int(nova_prioridade)
+
+            print("Tarefa editada com sucesso!")
+            input("Pressione <ENTER> para voltar ao menu.")
+            break                  
                 
 
 
