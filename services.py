@@ -112,7 +112,6 @@ def editar_tarefa():
             break
 
         listar_tarefas()
-
         try:
             escolha_tarefa = input('Escolha a tarefa a ser editada!!')
             escolha_int = int(escolha_tarefa)
@@ -126,10 +125,12 @@ def editar_tarefa():
             os.system('cls')
             print(f'Editando a tarefa: {tarefas[tarefa]}')   ## Formatar a saída para o usuário. 
 
+            os.system('cls')
             novo_nome = input(f'Nome: {tarefas[tarefa["nome"]]} - Insira o novo nome ou pressione <ENTER> para manter o atual -> ') 
             if novo_nome.strip():
                 tarefa["nome"] = novo_nome
             
+            os.system('cls')
             nova_data = input(f"Data atual: {tarefa['data'].strftime('%d/%m/%Y')}) - Insira nova data ou pressiona <ENTER>para manter a atual -> ").strip()
             if nova_data:
                 try:
@@ -137,6 +138,7 @@ def editar_tarefa():
                 except ValueError:
                     print("Data inválida, mantendo a anterior.")
             
+            os.system('cls')
             novo_horario = input(f'Horário (atual: {tarefa['data'].strftime('%H:%M')}) - Insira o novo horário ou pressione <ENTER> para manter o atual -> ")'.strip())
             if novo_horario:
                 try:
@@ -145,23 +147,22 @@ def editar_tarefa():
                     )
                 except ValueError:
                     print("Horário inválido, mantendo o anterior.")
-
+            
+            os.system('cls')
             nova_descr = input(f"Descrição atual: {tarefa['descr']} - Digite uma nova descrição ou pressione <ENTER> para manter a atual  -> ").strip()
             if nova_descr:
                 tarefa['descr'] = nova_descr   
-
+            
+            os.system('cls')
             nova_prioridade = input(f"Nova prioridade (atual: {tarefa['priori']}) [1, 2, 3] -> ").strip()
             if nova_prioridade in ('1', '2', '3'):
                 tarefa['priori'] = int(nova_prioridade)
 
+            os.system('cls')
             print("Tarefa editada com sucesso!")
             input("Pressione <ENTER> para voltar ao menu.")
             break                  
                 
-
-
-            novo_nome = input(f'Nome: {tarefas[tarefa["nome"]]} - Insira o novo nome -> ')         
-
         except IndexError:
             print("Número inválido. Escolha um número correspondente a uma tarefa existente.")
             input("Pressione <ENTER> para tentar novamente.")
